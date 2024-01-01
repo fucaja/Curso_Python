@@ -521,6 +521,7 @@ Valor de 'nombre' después de setdefault: Jose
 Diccionario después de update: {'nombre': 'Jose', 'ubicacion': 'Ciudad X', 'ocupacion': 'Programador'}
 Vista de valores: dict_values(['Jose', 'Ciudad X', 'Programador'])
 Diccionario después de clear: {}
+```
 
 
 
