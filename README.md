@@ -510,3 +510,5 @@ else:
 
 ```
 Las estructuras condicionales pueden anidarse, permitiendo condiciones más complejas y toma de decisiones más sofisticadas en un programa. Estos son elementos clave para controlar el flujo de ejecución en Python y en la programación en general.
+
+
