@@ -1293,10 +1293,687 @@ resultado_all = all(lista_booleanos)
 print(resultado_all)  # Output: False
 ```
 
--**any(iterable):** Retorna True si al menos un elemento en el iterable es verdadero.
+- **any(iterable):** Retorna True si al menos un elemento en el iterable es verdadero.
 
 ```python
 lista_booleanos = [True, False, False, False]
 resultado_any = any(lista_booleanos)
 print(resultado_any)  # Output: True
+```
+
+## Crear funciones
+
+Crear funciones en programación proporciona varios beneficios y facilita el desarrollo de software. Algunas razones clave para crear y utilizar funciones son:
+
+- **Reutilización de código:** Las funciones permiten encapsular un conjunto de instrucciones en una unidad independiente. Esto facilita la reutilización del código en diferentes partes del programa o incluso en diferentes programas. En lugar de repetir el mismo bloque de código, puedes llamar a la función cuando sea necesario.
+
+- **Modularidad:** La modularidad es un principio de diseño que aboga por dividir un programa en partes más pequeñas y manejables (módulos o funciones). Cada función realiza una tarea específica, lo que facilita la comprensión del código y el mantenimiento del mismo.
+
+- **Legibilidad del código:** Al dividir el código en funciones más pequeñas y enfocadas, el código general del programa se vuelve más legible. Cada función puede tener un propósito claro y un nombre descriptivo, facilitando la comprensión del flujo del programa.
+
+- **Abstracción:** Las funciones permiten abstraer detalles de implementación. Cuando llamas a una función, no necesitas conocer los detalles internos de cómo se realiza la tarea; solo necesitas saber qué hace la función y qué tipo de resultados esperar.
+
+- **Facilita la depuración:** Al tener funciones independientes y específicas, es más fácil aislar problemas y depurar el código. Puedes probar y corregir funciones individuales sin afectar otras partes del programa.
+
+- **Facilita la colaboración:** En proyectos más grandes o en equipos de desarrollo, las funciones proporcionan una forma eficiente de dividir el trabajo. Cada miembro del equipo puede trabajar en funciones específicas sin interferir demasiado con el código de los demás.
+
+- **Encapsulamiento:** Las funciones también permiten encapsular datos al aceptar parámetros y devolver resultados. Esto ayuda a crear un entorno controlado para la manipulación de datos, evitando efectos secundarios no deseados en otras partes del programa.
+
+- **Mejora el mantenimiento del código:** Cuando se realizan cambios en los requisitos o se corrigen errores, las funciones permiten realizar modificaciones en un lugar específico, evitando la necesidad de cambiar múltiples instancias del mismo código.
+
+Crear funciones es una práctica esencial en la programación, ya que mejora la legibilidad, promueve la reutilización del código, facilita la depuración y el mantenimiento.
+
+### Creando una función
+
+```python
+def saludar():
+    return "Hola a todos"
+```
+
+### Llamando a la función
+
+```python
+print(saludar())
+```
+
+### Funciones con parámetros
+
+```python
+def tabla(numero, operacion):
+    operacion = operacion.lower()
+    if operacion == "multiplicacion":
+        for num in range(11):
+            print(f"{numero} * {num} = {numero * num}")
+    elif operacion == "suma":
+        for num in range(11):
+            print(f"{numero} + {num} = {numero + num}")
+    elif operacion == "resta":
+        for num in range(11):
+            print(f"{numero} - {num} = {numero - num}")
+    else:
+        print(f"No encontrado")
+    return
+```
+```python
+tabla(2, "multiplicacion")
+tabla(2, "suma")
+tabla(2, "resta")
+```
+
+### Regresando múltiples parámetros 
+
+```python
+def numero_maximo(numero1, numero2):
+    maximo = max(numero1, numero2)
+    return (numero1, numero2, maximo)
+```
+```python
+num1, num2, max = numero_maximo(5,4)
+print(f"Entre el número {num1} y {num2} el máximo es {max}")
+```
+
+### Funciones con multiples parámetros
+
+```python
+def suma(*numeros):
+    return sum(numeros)
+
+print(suma(1,2,3))
+print(suma(1,2,3,4,5,6,7,8))
+```
+Si queremos agregar más parámetros, debemos utilizar *numeros al final.
+
+```python
+def suma(nombre, *numeros):
+    return f"{nombre} la suma de tus número es {sum(numeros)}"
+
+print(suma("Mario",1,2,3))
+```
+
+```python
+# Si agregamos una lista tambien funciona
+# Ésta es la forma óptima de sumar valores
+def suma(numeros):
+    print(f"No los suma...") 
+    print(*numeros)
+    print(f"Si los suma {sum([*numeros])}")
+    
+suma([1,2,3,4,5,6,7,8])
+```
+### Reordenando orden de parámetros
+
+```python
+# Podemos cambiar el orden de los argumentos siempre y cuando agreguemos el nombre de la variable a cada entrada
+def saludo_personalizado(nombre, apellido, adjetivo):
+    return f"Hola {nombre} {apellido} eres un {adjetivo}"
+
+print(saludo_personalizado("Pedro","Pérez","capo"))
+print(saludo_personalizado(apellido="Pérez", nombre="Pedro",adjetivo="capo"))
+```
+
+### Predefiniendo parámetros
+
+```python
+def saludo_personalizado(nombre, apellido, adjetivo ="genial"):
+    return f"¡Hola {nombre} {apellido}! Eres realmente {adjetivo}."
+
+print(saludo_personalizado("Pedro","Pérez"))
+print(saludo_personalizado(apellido="Pérez", nombre="Pedro",adjetivo="increíble"))
+```
+
+## Funciones lambda
+
+Las funciones lambda en Python son **funciones anónimas**, es decir, funciones sin nombre. Se crean utilizando la palabra clave lambda y son útiles en situaciones donde se requiere una función simple y breve. Aquí hay algunas características clave y usos comunes de las funciones lambda:
+
+
+```python
+# Función normal
+def multiplicar_por_dos(numero):
+    return numero*2
+
+print(multiplicar_por_dos(5)) # 10
+
+# Misma función pero con lambda
+#nombre de funcion = lambda parm: expresion
+multiplicar_por_dos = lambda  x:  x * 2
+
+print(multiplicar_por_dos(5)) # 10
+```
+
+Otro ejemplo práctico es si queremos obtener los números impares con la función **filter()**.
+
+```python
+def es_par(numero):
+    if(numero % 2 == 0):
+        return True
+
+numeros = [1,2,3,4,5,6,7,8,9]
+
+#Usando filter con una función común
+numeros_pares = filter(es_par,numeros)
+
+#Regresa solo los pares
+print(list(numeros_pares))
+```
+
+```python
+# Con lambda lo hacemos en una sola linea
+numeros_pares = filter(lambda num: num % 2 == 0,numeros)
+print(list(numeros_pares))
+```
+
+# 8 Modulos
+
+Un módulo es un archivo que contiene código (funciones, variables, y/o clases) que puede ser reutilizado en otros programas. Los módulos permiten organizar y estructurar el código de manera más eficiente, al dividirlo en unidades lógicas y reutilizables. Algunos de los benefícios son:
+
+- **Reutilización de Código:** Los módulos permiten reutilizar funciones y clases en varios programas. Puedes escribir una vez y utilizarlo en múltiples lugares, lo que facilita el mantenimiento y evita la repetición de código.
+
+- **Organización del Código:** Los módulos ayudan a organizar el código al agrupar funciones y clases relacionadas en archivos separados. Esto mejora la legibilidad y mantenimiento del código.
+
+- **Separación de Responsabilidades:** Al dividir el código en módulos, puedes asignar diferentes responsabilidades a cada módulo. Cada módulo puede encargarse de una tarea específica, lo que facilita la gestión y comprensión del código.
+
+- **Espacio de Nombres:** Los módulos proporcionan un espacio de nombres separado para sus variables y funciones. Esto evita colisiones de nombres entre diferentes partes de tu código y mejora la encapsulación.
+
+- **Facilita la Colaboración:** En proyectos grandes, los módulos facilitan la colaboración entre diferentes desarrolladores o equipos. Cada módulo puede ser desarrollado y mantenido de manera independiente.
+
+- **Facilita las Actualizaciones:** Si necesitas actualizar o mejorar una parte específica de tu código, solo necesitas modificar el módulo correspondiente sin afectar otras partes del programa.
+
+- **Mejora la Escalabilidad:** A medida que tu proyecto crece, los módulos te permiten escalar de manera más efectiva. Puedes agregar nuevos módulos o modificar existentes sin afectar el resto del código.
+
+- **Facilita las Pruebas Unitarias:** La modularidad facilita la creación y ejecución de pruebas unitarias. Puedes probar cada módulo de manera independiente, asegurando que cada parte del código funcione correctamente.
+
+Para utilizar un módulo en un programa Python, puedes importarlo mediante la palabra clave import.
+
+## Creando módulo
+
+```python
+# El módulo es un archivo.py (m_saludo.py)
+def saludar(name):
+    return f"Hola {name} cómo te va?"
+
+def saludar_formal(name):
+    return f"Hola {name} cómo se encuentra?"
+```
+
+## Importando módulo
+
+```python
+import m_saludo
+saludo = m_saludo.saludar("Jose")
+```
+
+```python
+import m_saludo as saludar
+saludo = saludar.saludar("Jose")
+print(saludo)
+```
+### Importando funciones de modulos
+
+```python
+#from m_saludo import saludar				 # Llamando una función
+#from m_saludo import * 					 # Llamando todas las funciones
+from m_saludo import saludar, saludar_formal # Llamando dos funciones
+
+saludo = saludar("Jose")
+saludo_formal = saludar_formal("Jose")
+print(saludo)
+print(saludo_formal)
+```
+
+## Enrutamiento de módulos
+
+El enrutamiento de módulos es la manera en como se estructuran y utilizan los módulos en un proyecto.
+
+### Módulo en carpeta
+
+
+
+```python
+# Si el modulo está en una carpeta
+#      nombre_carpeta    .nom_modulo. función
+import modulos_en_carpeta.m_en_carpeta
+print(modulos_en_carpeta.m_en_carpeta.imprimir())
+```
+
+```
+# Agregando un nombre a nuestro módulo
+import modulos_en_carpeta.m_en_carpeta as saludar
+print(saludar.imprimir())
+```
+
+### Submódulos
+
+```python
+# Si el modulo está dentro de varias carpetas las podemos llamar de la sigueinte manera
+import modulos_en_carpeta1.modulos_en_carpeta2.m_en_carpeta
+print(modulos_en_carpeta1.modulos_en_carpeta2.m_en_carpeta.imprimir())
+```
+
+```
+# Agregando un nombre a nuestro módulo
+import modulos_en_carpeta1.modulos_en_carpeta2.m_en_carpeta as saludar
+print(saludar.imprimir())
+```
+
+### Agregando ruta al sistema (sys)
+
+Al agregar la ruta al sistema podemos acceder a los datos de manera sencilla. Esto funciona por ejecución no se agrega permanentemente.
+
+```python
+import sys
+
+# sys.builtin_module_names es parecido a dir() y regresa todos los nombres de los modulos creados
+# Ésto sirve para ver los módulo creados por python no se repitan con los nuestros
+# Si esto pasa nuestro módulo tendra conflictos y nunca será llamado 
+print(sys.builtin_module_names)
+
+# Ver rutas de python
+print(sys.path)
+
+# Agregamos una ruta
+sys.path.append("c:\\Users\\Jose\\Desktop\\Curso Python\\8_Modulos\\modulos_en_carpeta")
+print(sys.path)
+
+import m_saludar
+print(m_saludar.saludar("Jose"))
+```
+
+## Paquetes
+
+
+En Python, un paquete es una forma de organizar y estructurar módulos relacionados en un directorio. Un paquete es simplemente un directorio que contiene un archivo especial llamado __init__.py y posiblemente subdirectorios y archivos adicionales. La presencia del archivo __init__.py indica que el directorio debe tratarse como un paquete de Python.
+
+Aquí hay algunas características clave de los paquetes en Python:
+
+- **Organización Jerárquica:** Los paquetes permiten organizar módulos en una estructura jerárquica. Puedes tener subpaquetes (directorios dentro de un paquete) para organizar aún más tu código.
+
+```
+mi_paquete/
+├── __init__.py
+├── modulo_a.py
+├── modulo_b.py
+└── subpaquete/
+    ├── __init__.py
+    └── modulo_c.py
+```
+
+- **Archivo __init__.py:** El archivo __init__.py puede estar vacío o contener código de inicialización para el paquete. La presencia de este archivo es necesaria para que Python trate el directorio como un paquete.
+
+- **Importación Jerárquica:** Puedes importar módulos de un paquete utilizando la notación de puntos. Por ejemplo:
+
+```python
+from mi_paquete import modulo_a
+from mi_paquete.subpaquete import modulo_c
+```
+
+- **Facilita la Organización:** Los paquetes son útiles para organizar proyectos más grandes y complejos. Proporcionan una manera estructurada de organizar y acceder a los módulos.
+
+- **Evita Colisiones de Nombres:** Al tener subpaquetes y módulos organizados en una estructura de directorios, se evitan colisiones de nombres entre módulos de diferentes partes de tu código.
+
+# 9 Archivos
+
+
+En Python, los archivos son utilizados para realizar operaciones de entrada y salida (I/O) de datos. Los archivos permiten a los programas leer información de fuentes externas, como archivos en el sistema de archivos del computador, y escribir datos para almacenarlos de forma persistente. Un archivo es un es un contenedor de información con un formato (txt, csv, tsv, png, jpg, mp4).
+
+
+## Archivos txt
+
+### Leer archivo
+
+
+```python
+# Encoding UTF-8 (codificación universal) se utiliza para no tener problemas con carácteres especiales 
+archivo_sin_leer = open("texto.txt", encoding="UTF-8")
+
+# Leemos el archivo completo
+archivo_leido = archivo_sin_leer.read()
+print(archivo_leido)
+
+# Leemos el archivo por lineas 
+archivo_por_lineas = archivo_sin_leer.readlines()
+print(archivo_por_lineas)
+
+# Leemos la primera linea del archivo   Si agregamos .readline(20) solo lee los primeros 20 caracteres
+archivo_primera_linea = archivo_sin_leer.readline()
+print(archivo_primera_linea)
+```
+
+Cuando abrimos un archivo es importante cerrarlos despues de utilizarlos, para ello utilizamos la función .close()
+
+```python
+#Cerramos el archivo
+archivo_sin_leer.close()
+```
+
+Si no queremos hacerlo manualmente utilizamos la clausula with para cerrarlos automáticamente
+
+```python
+with open("texto.txt", encoding="UTF-8") as archivo_sin_leer:
+    archivo_primera_linea = archivo_sin_leer.readline()
+    print(archivo_primera_linea)
+```
+
+### Escribir archivo
+
+```python
+#w write a append 
+with open("texto2.txt", 'w', encoding="UTF-8") as archivo:
+    texto = """Escribiendo en el archivo\nRevisando si se escribió bien"""
+    
+    #re-escribiendo el archivo
+    archivo.write(texto)
+    
+    archivo.writelines(["\nAgregando más lineas","\nMuchas más"])
+```
+
+## Archivos csv
+
+### Abrir archivo
+
+```python
+import csv
+
+with open("9_Archivos\\archivo_csv.csv") as archivo:
+    #Retorna un iterable
+    reader = csv.reader(archivo)
+    for row in reader:
+        print(row)
+```
+
+#### Dataframe
+
+Un DataFrame es una estructura de datos bidimensional en pandas, una biblioteca de análisis de datos en Python. Es similar a una hoja de cálculo o una tabla de base de datos, y se utiliza comúnmente para representar y manipular datos tabulares.
+
+Algunas características clave de un DataFrame en pandas incluyen:
+
+- **Bidimensional:** Un DataFrame es bidimensional, lo que significa que tiene filas y columnas. Puedes pensar en él como una tabla en la que cada fila representa un conjunto de datos y cada columna representa una variable.
+
+- **Índice:** Los DataFrames tienen un índice que identifica de manera única cada fila. Puedes utilizar el índice para acceder a filas específicas y realizar operaciones de manipulación de datos.
+
+- **Columnas con Nombres:** Cada columna en un DataFrame tiene un nombre que la identifica. Puedes acceder a las columnas por su nombre y realizar operaciones en columnas específicas.
+
+- **Datos Heterogéneos:** Los DataFrames pueden contener datos de diferentes tipos en diferentes columnas. Puedes tener columnas con números enteros, números de punto flotante, cadenas, etc.
+
+- **Funciones Integradas:** Pandas proporciona muchas funciones integradas para realizar operaciones comunes en los DataFrames, como filtrar datos, calcular estadísticas, realizar agrupaciones y más.
+
+```python
+import pandas as pd
+
+df_archivo  = pd.read_csv("9_Archivos\\archivo_csv.csv", names=['nombre','apellido','edad'], skiprows=[0])
+print(df_archivo.head())
+
+# reordenar columnas
+print(df_archivo['edad'].head())
+
+# reordenar por edad
+print(df_archivo.sort_values(by='edad',ascending= True))
+
+#concatenar df
+print(pd.concat([df_archivo,df_archivo]))
+
+print("#################################")
+#Primeras 3
+print(df_archivo.head(3))
+#Ultimas 3
+print(df_archivo.tail(3))
+print("#################################")
+
+filas, columnas = df_archivo.shape
+
+#Analisis estadistico
+print(df_archivo.describe())
+```
+
+##### Accediendo a elementos
+
+```python
+#Accediendo a un elemento específico con loc
+#Accediendo a la edad de la fila 2 con loc
+#                          fila, columna
+elemento_df = df_archivo.loc[2,'edad']
+print(elemento_df)
+
+#Accediendo a la edad de la fila 2 con iloc 
+#                indice de fila, columna
+elemento_df = df_archivo.iloc[2,2]
+print(elemento_df)
+ 
+# Accediendo a todos los valores de una columna con loc
+columna_df = df_archivo.loc[:,'nombre']
+print(columna_df)
+
+# Accediendo a todos los valores de una columna con iloc
+columna_df = df_archivo.iloc[:,1]
+print(columna_df)
+
+
+# Accediendo a todos los valores de una columna con loc
+fila_df = df_archivo.loc[2,:]
+print(fila_df)
+
+# Accediendo a todos los valores de una columna con iloc
+fila_df = df_archivo.iloc[2,:]
+print(fila_df)
+
+mayor_que_20 = df_archivo.loc[df_archivo['edad']>20,:]
+print(mayor_que_20)
+
+#Slicing
+cadena = "abcdefghijklmnopqrstuvwxyz"
+
+print(cadena[0:10])
+print(cadena[3:10])
+```
+### Accediendo a Archivos grandes
+
+Para archivos muy grandes es mejor utilizar pandas y acceder a los datos por paquetes
+
+```
+import pandas as pd
+def read_csv_in_chuncks(file_name):
+    for i, chunk in enumerate(pd.read_csv(file_name,chunksize=1000)):
+        print("chunk #{}".format(i))
+        print(chunk)
+
+read_csv_in_chuncks("big_file.csv")
+```
+
+# 10 Graficas
+
+Para realizar gráficos en Python, puedes utilizar las bibliotecas pandas, matplotlib y seaborn. A continuación, te proporcionaré ejemplos básicos de cómo utilizar estas bibliotecas para crear gráficos a partir de un DataFrame de pandas.
+
+```
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("datos_graficos.csv",names=["fecha","pasajeros"])
+
+
+#           Tiene que tener el mismo nombre en el df
+sns.lineplot(x="fecha", y="pasajeros", data=df)
+
+
+# Encontrar el índice del máximo valor en la columna 'pds'
+indice_maximo = df['pasajeros'].idxmax()
+
+# Obtener las coordenadas del punto máximo
+x_maximo = df.loc[indice_maximo, 'fecha']
+y_maximo = df.loc[indice_maximo, 'pasajeros']
+
+# Resaltar el punto máximo en el gráfico
+plt.scatter(x_maximo, y_maximo, color='red', label='Máximo')
+
+# Mostrar la leyenda
+plt.legend()
+
+plt.show()
+```
+
+# Excepciones
+
+Una excepción es un evento que ocurre durante la ejecución de un programa y que interrumpe el flujo normal de instrucciones. Las excepciones son situaciones inesperadas o errores que pueden ocurrir durante la ejecución del código y que pueden necesitar ser manejados de manera especial.
+
+En Python, las excepciones se representan mediante objetos llamados "excepciones". Cada tipo de error tiene su propia clase de excepción. Algunos ejemplos comunes de excepciones en Python incluyen:
+
+```python
+def suma():
+    while True:
+        num1 = input("Numero 1: ")
+        num2 = input("Numero 2: ")
+        try:
+            resultado = int(num1) + int(num2)
+        except:
+            print("ambos valores deben ser númericos")
+            # Podemos enviar como mensaje el error que lanza python
+            print(f"ERROR: {e}")
+            # Obteber el nombre de la excepción y agregarla al try (tomar en cuenta que si except general está en el try los demás no se ejecutan)
+            print(f"Nombre del error: {type(e).__name__}")
+        else:
+            # Si todo sale bien, terminamos el bucle
+            break
+        finally:
+            # Esto se ejecuta cada iteración casi no se utiliza 
+            print("programa terminado")
+    return resultado
+
+print(suma())
+```
+
+## Identificando excepciones
+
+```
+#Podemos guardar tambien las excepciones
+def suma():
+    while True:
+        num1 = input("Numero 1: ")
+        num2 = input("Numero 2: ")
+        try:
+            resultado = int(num1) + int(num2)
+        except ZeroDivisionError as e:
+            print(f"No dividas por cero")
+        except ValueError as ex:
+            print(f"Agrega solo números")
+        else:
+            break
+        finally:
+            # Esto se ejecuta cada iteración casi no se utiliza 
+            print("programa terminado")
+    return resultado
+
+print(suma())
+```
+## Identificando nombre de error
+
+```python
+import traceback
+
+try:
+    x = 10
+    y = "abc"
+    resultado = x + y  # Esto generará un TypeError
+except Exception as e:
+    # Imprime la información detallada sobre la excepción
+    traceback.print_exc()
+```
+
+## Excepciones propias
+
+```
+class MiExcepcion(Exception):
+    def __init__(self, err):
+        print(f"Cometiste el siguiente error: {err}")
+        
+
+# raise sirve para lanzar excepciones por lo tanto se ejecuta el try y except
+try:
+    raise MiExcepcion("Prueba de error de excepcion")
+except:
+    print("No te vuelvas a equivocar mano")
+```    
+
+
+# 12 Expresiones regulares
+
+Las expresiones regulares, comúnmente conocidas como "regex" o "regexp", son secuencias de caracteres que forman un patrón de búsqueda. Estos patrones se utilizan para buscar, analizar y manipular texto basándose en ciertas reglas definidas. Las expresiones regulares son una herramienta poderosa y flexible utilizada en la mayoría de los lenguajes de programación y en diversas aplicaciones para realizar operaciones relacionadas con cadenas de texto.
+
+Características clave de las expresiones regulares:
+
+- **Patrones de Búsqueda:** Las expresiones regulares permiten definir patrones de búsqueda que describen conjuntos específicos de cadenas de texto. Estos patrones pueden incluir caracteres literales, metacaracteres y constructos especiales.
+
+- **Metacaracteres:** Los metacaracteres son caracteres especiales con significados particulares dentro de una expresión regular. Por ejemplo, el punto (.) coincide con cualquier carácter, el asterisco (*) coincide con cero o más repeticiones del carácter anterior, y el signo de interrogación (?) indica que el carácter anterior es opcional.
+
+- **Coincidencia y Extracción:** Las expresiones regulares se utilizan para buscar coincidencias o para extraer partes específicas de un texto. Puedes buscar si una cadena cumple con un patrón específico y extraer información relevante de esa cadena.
+
+- **Validación de Formato:** Las expresiones regulares son útiles para validar si una cadena de texto cumple con un formato específico. Puedes verificar si un número de teléfono, una dirección de correo electrónico o cualquier otro formato sigue la estructura esperada.
+
+- **Reemplazo de Texto:** Las expresiones regulares se utilizan para buscar y reemplazar patrones específicos en un texto. Puedes realizar cambios en un texto basándote en reglas definidas por patrones.
+
+- **Agrupación y Captura:** Puedes agrupar partes de un patrón utilizando paréntesis, lo que permite capturar y acceder a subcadenas específicas. Esto es útil para extraer información específica de una cadena.
+
+
+
+- **\d =** Busca digitos numéricos del 0 - 9
+- **\D =** Busca TODO menos los digitos numéricos
+- **\w =** Busca caracteres alfanuméricos [a-z A-Z 0-9 _]
+- **\W =** Busca TODO menos caracteres alfanuméricos [a-z A-Z 0-9 _]
+- **\s =** Busca los espacios en blanco > espacios, tabs, saltos de linea
+- **\S =** Busca TODO menos los espacios en blanco > espacios, tabs, saltos de linea
+- **\n =** Busca saltos en linea
+- **. =** Busca todo menos saltos de linea
+- **\ =** Cancela caracteres especiales \. para buscar punto \_ para buscar _
+- **^ =** Busca el comienzo de una linea
+- **$ =** Busca el final de una linea
+- **{n} =** repite n cantidad de veces el valor de la izquierda
+- **{n,m} =** Busca como mínimo n y máximo m
+- **| =** Busca una cosa o la otra (si ambos cumples devuelve ambos)
+- **\* =** Es un cuatificador que indica que el elemento precedente puede parecer cero o más veces
+
+```python 
+
+import re
+
+texto = """Hola maestro, esta es la cadena 111, como estas mi capitan
+esta es la segunda linea de texto (2. ) (probando abbb ababab)
+Y esta es la tercera y definitiva capitanazo Hola
+"""
+
+# Crear un objeto de compilación de expresiones regulares con ignorecase
+regex = re.compile("Hola", flags=re.IGNORECASE)
+
+# Buscar la primera palabra dentro de la variable y retorna el inicio y final
+resultado = regex.search(texto)
+inicio, fin = resultado.start(), resultado.end()
+
+print(f"El inicio es: {inicio} y el final es: {fin}")
+
+# Buscar un número, punto y espacio en blanco
+resultados = re.findall(r"\d\.\s", texto)
+
+# Buscar el principio de línea
+resultados = re.findall(r"^Hola", texto)
+
+# Buscar el principio de línea (multilínea)
+resultados = re.findall(r"^esta", texto, flags=re.M)
+
+# Buscar el final de línea
+resultados = re.findall(r"Hola$", texto)
+resultados = re.findall(r"capitan$", texto, flags=re.M)
+
+# Buscar tres números juntos
+resultados = re.findall(r"\d{3}", texto)
+resultados = re.findall(r"1{3}", texto)
+
+# Buscar una letra 'a' seguida de tres 'b'
+resultados = re.findall(r"ab{3}", texto)
+
+# Buscar tres 'a' y tres 'b' usando grupos
+resultados = re.findall(r"(ab){3}", "abababab ababab abc ab abab")
+# Regresa ['ab', 'ab'] porque solo abababab y ababab cumplen
+
+# Buscar tres 'a' o tres 'b' usando conjuntos
+resultados = re.findall(r"[ab]{3}", "abaaaabbabbbb")
+# Regresa ['aba', 'aaa', 'bba', 'bbb'] porque separa abaaaabbabbbb en grupos [aba aaa bba bbb] b
+
+print(resultados)
 ```
